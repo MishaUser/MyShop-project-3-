@@ -131,3 +131,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Ключ для хранения корзины в пользовательском сеансе
 CART_SESSION_ID = 'cart'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
