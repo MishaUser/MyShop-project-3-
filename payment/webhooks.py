@@ -4,7 +4,6 @@ from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from orders.models import Order
 
-
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
@@ -32,6 +31,8 @@ def stripe_webhook(request):
                 return HttpResponse(status=404)
             # пометить заказ как оплаченный
             order.paid = True
+            # сохранить ИД платежа Stripe
+            order.stripe_id = session.payment_intent
             order.save()
     
     return HttpResponse(status=200)
